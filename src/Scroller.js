@@ -949,7 +949,7 @@ var Scroller;
                         self.__decelerationVelocityX = self.options.decelarationVelocityX?
                             (movedLeft / Math.abs(movedLeft)) * self.options.decelarationVelocityX : movedLeft / timeOffset * (1000 / 60);
 
-                        self.__decelerationVelocityY = self.options.__decelerationVelocityY?
+                        self.__decelerationVelocityY = self.options.decelerationVelocityY?
                             (movedTop / Math.abs(movedTop)) * self.options.decelarationVelocityX : movedTop / timeOffset * (1000 / 60);
 
 						// How much velocity is required to start the deceleration
