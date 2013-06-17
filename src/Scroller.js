@@ -66,7 +66,7 @@ var Scroller;
 				provided that another scrolling action has not begun. Used to know
 				when to fade out a scrollbar. */
 			scrollingComplete: NOOP,
-			
+
 			/** This configures the amount of change applied to deceleration when reaching boundaries  **/
             penetrationDeceleration : 0.03,
 
@@ -945,9 +945,12 @@ var Scroller;
 						var movedLeft = self.__scrollLeft - positions[startPos - 2];
 						var movedTop = self.__scrollTop - positions[startPos - 1];
 
-						// Based on 50ms compute the movement to apply for each render step
-						self.__decelerationVelocityX = movedLeft / timeOffset * (1000 / 60);
-						self.__decelerationVelocityY = movedTop / timeOffset * (1000 / 60);
+                        // Based on 50ms compute the movement to apply for each render step
+                        self.__decelerationVelocityX = self.options.decelarationVelocityX?
+                            (movedLeft / Math.abs(movedLeft)) * self.options.decelarationVelocityX : movedLeft / timeOffset * (1000 / 60);
+
+                        self.__decelerationVelocityY = self.options.__decelerationVelocityY?
+                            (movedTop / Math.abs(movedTop)) * self.options.decelarationVelocityX : movedTop / timeOffset * (1000 / 60);
 
 						// How much velocity is required to start the deceleration
 						var minVelocityToStartDeceleration = self.options.paging || self.options.snapping ? 4 : 1;
@@ -1278,8 +1281,8 @@ var Scroller;
 				var scrollOutsideY = 0;
 
 				// This configures the amount of change applied to deceleration/acceleration when reaching boundaries
-				var penetrationDeceleration = self.options.penetrationDeceleration; 
-				var penetrationAcceleration = self.options.penetrationAcceleration; 
+				var penetrationDeceleration = self.options.penetrationDeceleration;
+				var penetrationAcceleration = self.options.penetrationAcceleration;
 
 				// Check limits
 				if (scrollLeft < self.__minDecelerationScrollLeft) {
